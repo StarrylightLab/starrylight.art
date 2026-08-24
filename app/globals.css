@@ -9,8 +9,8 @@
   --ice: #9fd0ff;
   --violet: #b38cff;
   --violet-deep: #6e4cc8;
-  --serif: 'Instrument Serif', 'Songti SC', 'Noto Serif SC', Georgia, serif;
-  --sans: 'Instrument Sans', 'PingFang SC', 'Noto Sans SC', system-ui, sans-serif;
+  --display: 'Space Grotesk', 'PingFang SC', 'Noto Sans SC', system-ui, sans-serif;
+  --sans: 'Outfit', 'PingFang SC', 'Noto Sans SC', system-ui, sans-serif;
   --pad: clamp(1.25rem, 5.4vw, 4.75rem);
 }
 
@@ -36,7 +36,7 @@ body {
     radial-gradient(900px 520px at -8% 108%, rgba(64, 96, 180, 0.14), transparent 58%),
     var(--night);
   color: var(--paper);
-  font-family: var(--serif);
+  font-family: var(--sans);
 }
 
 a {
@@ -120,8 +120,10 @@ nav {
 }
 
 .wordmark {
-  font-size: 1.35rem;
-  letter-spacing: -0.06em;
+  font-family: var(--display);
+  font-size: 1.22rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
   line-height: 1;
 }
 
@@ -338,12 +340,13 @@ nav {
 h1 {
   position: relative;
   z-index: 1;
-  max-width: min(18ch, 100%);
+  max-width: min(16ch, 100%);
   margin: 1.15rem 0 0;
-  font-size: clamp(2.7rem, 7.4vw, 7.4rem);
-  font-weight: 400;
-  letter-spacing: -0.07em;
-  line-height: 0.92;
+  font-family: var(--display);
+  font-size: clamp(2.6rem, 7vw, 6.6rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
   overflow-wrap: break-word;
 }
 
@@ -353,7 +356,8 @@ h1 .soft-break {
 }
 
 h1 em {
-  font-style: italic;
+  font-style: normal;
+  font-weight: 500;
   color: var(--light);
 }
 
@@ -417,11 +421,12 @@ h1 em {
 
 h2 {
   margin: 0;
-  max-width: 8em;
-  font-size: clamp(2.1rem, 4.4vw, 4.6rem);
-  font-weight: 400;
-  letter-spacing: -0.055em;
-  line-height: 1.05;
+  max-width: 10em;
+  font-family: var(--display);
+  font-size: clamp(1.9rem, 4vw, 3.8rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
 }
 
 .project-list,
@@ -485,10 +490,11 @@ h2 {
 
 .project-copy strong {
   display: block;
-  font-size: clamp(1.7rem, 3.1vw, 3.4rem);
-  font-weight: 400;
-  letter-spacing: -0.05em;
-  line-height: 1;
+  font-family: var(--display);
+  font-size: clamp(1.55rem, 2.8vw, 2.8rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
 }
 
 .project.is-pixel strong {
@@ -626,8 +632,10 @@ footer p {
 }
 
 footer a {
-  font-size: clamp(1.15rem, 2.5vw, 2.2rem);
-  letter-spacing: -0.04em;
+  font-family: var(--display);
+  font-size: clamp(1.1rem, 2.3vw, 1.85rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
   line-height: 1.15;
   overflow-wrap: anywhere;
   background-image: linear-gradient(var(--light), var(--light));

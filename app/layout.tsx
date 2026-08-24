@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from 'next';
-import '@fontsource/instrument-serif/latin.css';
-import '@fontsource/instrument-serif/latin-italic.css';
-import '@fontsource/instrument-sans/latin-400.css';
-import '@fontsource/instrument-sans/latin-500.css';
-import '@fontsource/instrument-sans/latin-600.css';
+import '@fontsource/space-grotesk/latin-500.css';
+import '@fontsource/space-grotesk/latin-600.css';
+import '@fontsource/space-grotesk/latin-700.css';
+import '@fontsource/outfit/latin-400.css';
+import '@fontsource/outfit/latin-500.css';
+import '@fontsource/outfit/latin-600.css';
 import './globals.css';
 
 export const metadata: Metadata = {
