@@ -5,53 +5,11 @@ const projects = site.projects as SiteProject[];
 const profiles = site.profiles.filter(isSiteLink);
 const social = site.social.filter(isSiteLink);
 
-const pixlerSprite = [
-  '000002200000',
-  '000022220000',
-  '000221122000',
-  '002211112200',
-  '022111111220',
-  '221111111122',
-  '022111111220',
-  '002211112200',
-  '000221122000',
-  '000022220000',
-  '000002200000',
-  '000000000000',
-];
-
-const iconSprite = [
-  '000000000000',
-  '001111111100',
-  '011222222110',
-  '012222222210',
-  '012211112210',
-  '012200002210',
-  '012201102210',
-  '012200002210',
-  '012211112210',
-  '011222222110',
-  '001111111100',
-  '000000000000',
-];
-
 function Star({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M12 1.1 13.42 10.58 22.9 12 13.42 13.42 12 22.9 10.58 13.42 1.1 12 10.58 10.58Z" />
     </svg>
-  );
-}
-
-function PixelSprite({ map, className }: { map: string[]; className?: string }) {
-  return (
-    <div className={className} aria-hidden="true">
-      {map.flatMap((row, y) =>
-        row.split('').map((cell, x) =>
-          cell === '0' ? null : <i key={`${x}-${y}`} data-c={cell} style={{ gridColumn: x + 1, gridRow: y + 1 }} />,
-        ),
-      )}
-    </div>
   );
 }
 
@@ -127,32 +85,25 @@ export default function Home() {
         <section className="work" id="work" aria-labelledby="work-title">
           <div className="section-heading">
             <p className="eyebrow">Selected work</p>
-            <h2 id="work-title">正在做的东西。</h2>
+            <h2 id="work-title">正在做的东西</h2>
           </div>
-          <ul className="project-grid">
+          <ul className="project-list">
             {projects.map((project) => (
               <li key={project.id}>
                 <a
-                  className={`project-card is-${project.style ?? 'plain'}`}
+                  className={`project${project.style ? ` is-${project.style}` : ''}`}
                   href={project.href}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <div className="card-preview">
-                    {project.style === 'pixel' ? (
-                      <PixelSprite className="pixel-canvas" map={pixlerSprite} />
-                    ) : (
-                      <div className="plugin-window">
-                        <span className="plugin-dots" />
-                        <PixelSprite className="pixel-canvas is-icon" map={iconSprite} />
-                      </div>
-                    )}
-                  </div>
-                  <div className="card-body">
-                    <p className="card-tag">{project.tag}</p>
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
-                  </div>
+                  <span className="project-type">{project.tag}</span>
+                  <span className="project-copy">
+                    <strong>{project.title}</strong>
+                    <small>{project.description}</small>
+                  </span>
+                  <span className="arrow" aria-hidden="true">
+                    ↗
+                  </span>
                 </a>
               </li>
             ))}
@@ -161,7 +112,7 @@ export default function Home() {
         <section className="elsewhere" id="links" aria-labelledby="links-title">
           <div className="section-heading">
             <p className="eyebrow">Elsewhere</p>
-            <h2 id="links-title">个人链接。</h2>
+            <h2 id="links-title">个人链接</h2>
           </div>
           <ExternalLinks items={profiles} className="profile-list" />
           {social.length > 0 ? (

@@ -18,7 +18,7 @@
     {
       "id": "pixel-icon",
       "title": "Pixel Icon",
-      "description": "在 Figma 里画 12×12 和 24×24 像素图标，导出 SVG。",
+      "description": "在 Figma 里绘制像素图标。",
       "href": "https://www.figma.com/community/plugin/1591864397761796253/pixel-icon",
       "tag": "Figma 插件",
       "style": "plugin"

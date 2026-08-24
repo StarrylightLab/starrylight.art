@@ -1,7 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-  <path d="M8 2.5h4a3.5 3.5 0 0 1 0 7H8z" fill="#f2ebe0"/>
-  <path d="M8 9.5h4a3.5 3.5 0 0 1 0 7H8z" fill="#c9b8ff"/>
-  <path d="M8 16.5h4A3.5 3.5 0 1 1 8 21.5z" fill="#f0d18a"/>
-  <circle cx="15.5" cy="13" r="3.5" fill="#9fd0ff"/>
-  <path d="M8 9.5a3.5 3.5 0 1 1 0-7z" fill="#b38cff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300" fill="none">
+  <title>Figma</title>
+  <path fill="#0ACF83" d="M50 300c27.6 0 50-22.4 50-50v-50H50c-27.6 0-50 22.4-50 50s22.4 50 50 50z"/>
+  <path fill="#A259FF" d="M0 150c0-27.6 22.4-50 50-50h50v100H50c-27.6 0-50-22.4-50-50z"/>
+  <path fill="#F24E1E" d="M0 50C0 22.4 22.4 0 50 0h50v100H50C22.4 100 0 77.6 0 50z"/>
+  <path fill="#FF7262" d="M100 0h50c27.6 0 50 22.4 50 50s-22.4 50-50 50h-50V0z"/>
+  <path fill="#1ABCFE" d="M200 150c0 27.6-22.4 50-50 50s-50-22.4-50-50 22.4-50 50-50 50 22.4 50 50z"/>
 </svg>
