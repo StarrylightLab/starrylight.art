@@ -107,10 +107,15 @@ export default function Home() {
       <main>
         <section className="hero" id="top">
           <div className="hero-light" aria-hidden="true">
-            <span className="glow" />
+            <span className="glow glow-cool" />
+            <span className="glow glow-warm" />
+            <span className="glow glow-core" />
             <span className="flare flare-x" />
             <span className="flare flare-y" />
             <Star className="spark" />
+            <span className="dust d1" />
+            <span className="dust d2" />
+            <span className="dust d3" />
           </div>
           <p className="eyebrow">{loc(site.hero.eyebrow, lang)}</p>
           <h1>

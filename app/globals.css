@@ -30,9 +30,10 @@ body {
   max-width: 100%;
   overflow-x: hidden;
   background:
-    radial-gradient(1200px 680px at 88% -10%, rgba(240, 209, 138, 0.14), transparent 55%),
-    radial-gradient(900px 640px at 108% 18%, rgba(179, 140, 255, 0.16), transparent 58%),
-    radial-gradient(900px 520px at -10% 110%, rgba(110, 76, 200, 0.12), transparent 60%),
+    radial-gradient(1100px 720px at 86% -8%, rgba(255, 214, 130, 0.16), transparent 52%),
+    radial-gradient(820px 640px at 100% 18%, rgba(186, 120, 255, 0.22), transparent 56%),
+    radial-gradient(700px 480px at 78% 8%, rgba(255, 132, 164, 0.1), transparent 48%),
+    radial-gradient(900px 520px at -8% 108%, rgba(64, 96, 180, 0.14), transparent 58%),
     var(--night);
   color: var(--paper);
   font-family: var(--serif);
@@ -200,10 +201,10 @@ nav {
 
 .hero-light {
   position: absolute;
-  top: 4%;
-  right: max(-6rem, -4vw);
+  top: -4%;
+  right: max(-3rem, -1vw);
   z-index: 0;
-  width: min(52vw, 34rem);
+  width: min(58vw, 40rem);
   aspect-ratio: 1;
   pointer-events: none;
 }
@@ -211,41 +212,115 @@ nav {
 .glow {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(255, 241, 200, 0.5) 0 8%, rgba(240, 209, 138, 0.18) 24%, rgba(179, 140, 255, 0.16) 42%, transparent 68%);
-  filter: blur(6px);
-  animation: breathe 7s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+
+.glow-core {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 252, 245, 0.95) 0 2.5%,
+    rgba(255, 224, 150, 0.55) 8%,
+    rgba(255, 186, 92, 0.18) 18%,
+    transparent 34%
+  );
+  filter: blur(1.5px);
+  animation: breathe 6.5s ease-in-out infinite;
+}
+
+.glow-warm {
+  inset: 8%;
+  background: radial-gradient(
+    circle at 46% 54%,
+    rgba(255, 150, 88, 0.42) 0 16%,
+    rgba(255, 92, 138, 0.22) 32%,
+    transparent 58%
+  );
+  filter: blur(22px);
+  animation: drift 11s ease-in-out infinite;
+}
+
+.glow-cool {
+  background: radial-gradient(
+    ellipse 70% 62% at 58% 44%,
+    rgba(168, 112, 255, 0.5) 0 20%,
+    rgba(92, 156, 255, 0.22) 40%,
+    rgba(40, 70, 160, 0.08) 58%,
+    transparent 74%
+  );
+  filter: blur(28px);
+  animation: breathe 9s ease-in-out infinite reverse;
 }
 
 .flare {
   position: absolute;
   left: 50%;
   top: 50%;
-  background: linear-gradient(90deg, transparent, rgba(255, 241, 200, 0.7), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 248, 230, 0.85), transparent);
   transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
 }
 
 .flare-x {
-  width: 78%;
-  height: 1px;
+  width: 86%;
+  height: 1.5px;
 }
 
 .flare-y {
-  width: 1px;
-  height: 78%;
-  background: linear-gradient(180deg, transparent, rgba(255, 241, 200, 0.55), transparent);
+  width: 1.5px;
+  height: 86%;
+  background: linear-gradient(180deg, transparent, rgba(255, 214, 255, 0.55), rgba(255, 248, 230, 0.8), transparent);
 }
 
 .spark {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 1.1rem;
-  height: 1.1rem;
-  color: var(--flare);
+  width: 1.35rem;
+  height: 1.35rem;
+  color: #fff8ea;
   transform: translate(-50%, -50%);
-  filter: drop-shadow(0 0 16px var(--light));
+  filter: drop-shadow(0 0 10px #fff) drop-shadow(0 0 28px #ffd27a) drop-shadow(0 0 48px #c084fc);
   animation: twinkle 3.8s ease-in-out infinite;
+}
+
+.dust {
+  position: absolute;
+  display: block;
+  width: 0.42rem;
+  height: 0.42rem;
+  color: #fff;
+  background: currentColor;
+  clip-path: polygon(50% 0, 58% 42%, 100% 50%, 58% 58%, 50% 100%, 42% 58%, 0 50%, 42% 42%);
+  opacity: 0.7;
+  mix-blend-mode: screen;
+  animation: twinkle 4.6s ease-in-out infinite;
+}
+
+.dust.d1 {
+  left: 28%;
+  top: 34%;
+  width: 0.28rem;
+  height: 0.28rem;
+  color: #c4b5fd;
+  animation-delay: -1.2s;
+}
+
+.dust.d2 {
+  left: 71%;
+  top: 58%;
+  width: 0.34rem;
+  height: 0.34rem;
+  color: #fde68a;
+  animation-delay: -2.4s;
+}
+
+.dust.d3 {
+  left: 62%;
+  top: 24%;
+  width: 0.22rem;
+  height: 0.22rem;
+  color: #fda4af;
+  animation-delay: -0.6s;
 }
 
 .eyebrow {
@@ -598,6 +673,18 @@ footer span {
   }
 }
 
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate(-3%, 2%) scale(1.08);
+    opacity: 1;
+  }
+}
+
 @media (min-width: 721px) {
   h1 .break {
     display: block;
@@ -680,9 +767,9 @@ footer span {
   }
 
   .hero-light {
-    top: -1rem;
-    right: -8rem;
-    width: 16rem;
+    top: -2rem;
+    right: -6rem;
+    width: 20rem;
   }
 
   h1 {
@@ -738,7 +825,8 @@ footer span {
 
   .glow,
   .spark,
-  .brand-star {
+  .brand-star,
+  .dust {
     animation: none;
   }
 
