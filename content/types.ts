@@ -24,12 +24,12 @@ export type SiteCopy = {
   navLinks: Localized;
   langAria: Localized;
   seeWork: Localized;
-  workEyebrow: Localized;
   workTitle: Localized;
-  linksEyebrow: Localized;
   linksTitle: Localized;
   social: Localized;
   footerNote: Localized;
+  copyEmail: Localized;
+  copied: Localized;
 };
 
 export type SiteContent = {

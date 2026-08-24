@@ -6,22 +6,22 @@
     "navWork": { "zh": "作品", "en": "Work" },
     "navLinks": { "zh": "链接", "en": "Links" },
     "langAria": { "zh": "切换语言", "en": "Switch language" },
-    "seeWork": { "zh": "看看作品", "en": "See work" },
-    "workEyebrow": { "zh": "作品", "en": "Selected work" },
-    "workTitle": { "zh": "正在做的东西", "en": "Things I'm making" },
-    "linksEyebrow": { "zh": "别处", "en": "Elsewhere" },
-    "linksTitle": { "zh": "个人链接", "en": "Personal links" },
+    "seeWork": { "zh": "看作品", "en": "View work" },
+    "workTitle": { "zh": "作品", "en": "Work" },
+    "linksTitle": { "zh": "个人链接", "en": "Links" },
     "social": { "zh": "社交", "en": "Social" },
-    "footerNote": { "zh": "欢迎一起做点有意思的东西。", "en": "Always happy to make something interesting together." }
+    "footerNote": { "zh": "保持联系", "en": "Stay in touch" },
+    "copyEmail": { "zh": "复制邮箱", "en": "Copy email" },
+    "copied": { "zh": "已复制", "en": "Copied" }
   },
   "hero": {
     "eyebrow": { "zh": "UI 设计 · 像素画 · 小工具", "en": "UI · Pixel · Small tools" },
     "line1": { "zh": "画像素，", "en": "Drawing pixels," },
     "line2": { "zh": "做一点", "en": " making things" },
-    "accent": { "zh": "有光的东西。", "en": "with a little light." },
+    "accent": { "zh": "有光的东西", "en": "with a little light" },
     "intro": {
-      "zh": "我是 UI 设计师，也是像素画爱好者。平时会做一些 Figma 插件，以及一些小的前端项目。",
-      "en": "I'm a UI designer and a pixel-art enthusiast. I make Figma plugins and small front-end projects."
+      "zh": "我是 UI 设计师，也是像素画爱好者。",
+      "en": "I'm a UI designer and a pixel-art enthusiast."
     }
   },
   "projects": [
@@ -29,8 +29,8 @@
       "id": "pixler",
       "title": "Pixler",
       "description": {
-        "zh": "把任意图片变成可施工的拼豆图纸。",
-        "en": "Turn images into bead-art patterns."
+        "zh": "把图片变成可施工的拼豆图纸。",
+        "en": "Turn pictures into bead-art patterns."
       },
       "href": "https://pixler.starrylight.art",
       "tag": { "zh": "网页", "en": "Web" },
@@ -40,7 +40,7 @@
       "id": "pixel-icon",
       "title": "Pixel Icon",
       "description": {
-        "zh": "在 Figma 里绘制像素图标。",
+        "zh": "在 Figma 里画像素图标。",
         "en": "Draw pixel icons in Figma."
       },
       "href": "https://www.figma.com/community/plugin/1591864397761796253/pixel-icon",

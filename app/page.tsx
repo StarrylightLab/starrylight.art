@@ -42,7 +42,7 @@ function ExternalLinks({ items, className, lang }: { items: SiteLink[]; classNam
         const name = loc(item.name, lang);
         return (
           <li key={`${name}-${item.url}`}>
-            <a href={item.url} target="_blank" rel="noreferrer">
+            <a href={item.url} target="_blank" rel="noreferrer noopener">
               <LinkGlyph name={name} icon={item.icon} />
               <span>{name}</span>
             </a>
@@ -69,14 +69,50 @@ function LanguageSwitch({ lang, onChange }: { lang: Lang; onChange: (lang: Lang)
   );
 }
 
+function EmailButton({ address, lang }: { address: string; lang: Lang }) {
+  const [copied, setCopied] = useState(false);
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(address);
+    } catch {
+      const field = document.createElement('textarea');
+      field.value = address;
+      field.setAttribute('readonly', '');
+      field.style.position = 'fixed';
+      field.style.left = '-9999px';
+      document.body.appendChild(field);
+      field.select();
+      document.execCommand('copy');
+      field.remove();
+    }
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1600);
+  };
+
+  return (
+    <button type="button" className="email" onClick={copy} aria-label={loc(site.ui.copyEmail, lang)}>
+      {copied ? loc(site.ui.copied, lang) : address}
+    </button>
+  );
+}
+
 export default function Home() {
   const [lang, setLang] = useState<Lang>('zh');
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search).get('lang');
     const next = query === 'en' || query === 'zh' ? query : readLang();
     setLang(next);
     writeLang(next);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const switchLang = (next: Lang) => {
@@ -90,19 +126,21 @@ export default function Home() {
       <a className="skip" href="#work">
         {loc(site.ui.skip, lang)}
       </a>
-      <header>
-        <nav aria-label={loc(site.ui.navAria, lang)}>
-          <a className="brand" href="#top">
-            <Star className="brand-star" />
-            <span className="wordmark">starrylight</span>
-            <span className="zh">星光</span>
-          </a>
-          <div className="nav-links">
-            <a href="#work">{loc(site.ui.navWork, lang)}</a>
-            <a href="#links">{loc(site.ui.navLinks, lang)}</a>
-            <LanguageSwitch lang={lang} onChange={switchLang} />
-          </div>
-        </nav>
+      <header className={scrolled ? 'is-scrolled' : undefined}>
+        <div className="nav-shell">
+          <nav aria-label={loc(site.ui.navAria, lang)}>
+            <a className="brand" href="#top">
+              <Star className="brand-star" />
+              <span className="wordmark">starrylight</span>
+              <span className="zh">星光</span>
+            </a>
+            <div className="nav-links">
+              <a href="#work">{loc(site.ui.navWork, lang)}</a>
+              <a href="#links">{loc(site.ui.navLinks, lang)}</a>
+              <LanguageSwitch lang={lang} onChange={switchLang} />
+            </div>
+          </nav>
+        </div>
       </header>
       <main>
         <section className="hero" id="top">
@@ -117,7 +155,6 @@ export default function Home() {
             <span className="dust d2" />
             <span className="dust d3" />
           </div>
-          <p className="eyebrow">{loc(site.hero.eyebrow, lang)}</p>
           <h1>
             {loc(site.hero.line1, lang)}
             <span className="soft-break">{loc(site.hero.line2, lang)}</span>
@@ -134,7 +171,6 @@ export default function Home() {
         </section>
         <section className="work" id="work" aria-labelledby="work-title">
           <div className="section-heading">
-            <p className="eyebrow">{loc(site.ui.workEyebrow, lang)}</p>
             <h2 id="work-title">{loc(site.ui.workTitle, lang)}</h2>
           </div>
           <ul className="project-list">
@@ -144,7 +180,7 @@ export default function Home() {
                   className={`project${project.style ? ` is-${project.style}` : ''}`}
                   href={project.href}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer noopener"
                 >
                   <span className="project-type">{loc(project.tag, lang)}</span>
                   <span className="project-copy">
@@ -161,7 +197,6 @@ export default function Home() {
         </section>
         <section className="elsewhere" id="links" aria-labelledby="links-title">
           <div className="section-heading">
-            <p className="eyebrow">{loc(site.ui.linksEyebrow, lang)}</p>
             <h2 id="links-title">{loc(site.ui.linksTitle, lang)}</h2>
           </div>
           <ExternalLinks items={profiles} className="profile-list" lang={lang} />
@@ -175,7 +210,7 @@ export default function Home() {
       </main>
       <footer id="contact">
         <p>{loc(site.ui.footerNote, lang)}</p>
-        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <EmailButton address={site.email} lang={lang} />
         <span>© {new Date().getFullYear()} Starrylight · 星光</span>
       </footer>
     </>
