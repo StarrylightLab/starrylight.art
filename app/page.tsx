@@ -69,31 +69,51 @@ function LanguageSwitch({ lang, onChange }: { lang: Lang; onChange: (lang: Lang)
   );
 }
 
-function EmailButton({ address, lang }: { address: string; lang: Lang }) {
-  const [copied, setCopied] = useState(false);
+async function copyText(value: string) {
+  try {
+    await navigator.clipboard.writeText(value);
+  } catch {
+    const field = document.createElement('textarea');
+    field.value = value;
+    field.setAttribute('readonly', '');
+    field.style.position = 'fixed';
+    field.style.left = '-9999px';
+    document.body.appendChild(field);
+    field.select();
+    document.execCommand('copy');
+    field.remove();
+  }
+}
 
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(address);
-    } catch {
-      const field = document.createElement('textarea');
-      field.value = address;
-      field.setAttribute('readonly', '');
-      field.style.position = 'fixed';
-      field.style.left = '-9999px';
-      document.body.appendChild(field);
-      field.select();
-      document.execCommand('copy');
-      field.remove();
-    }
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 1600);
+function EmailButton({ address, lang }: { address: string; lang: Lang }) {
+  const [notice, setNotice] = useState<string | null>(null);
+
+  const onClick = () => {
+    let leftPage = false;
+    const markLeave = () => {
+      leftPage = true;
+    };
+    window.addEventListener('blur', markLeave);
+    window.addEventListener('pagehide', markLeave);
+
+    window.setTimeout(() => {
+      window.removeEventListener('blur', markLeave);
+      window.removeEventListener('pagehide', markLeave);
+      if (leftPage || document.hidden || !document.hasFocus()) return;
+      void copyText(address).then(() => {
+        setNotice(loc(site.ui.mailFallback, lang));
+        window.setTimeout(() => setNotice(null), 2400);
+      });
+    }, 700);
   };
 
   return (
-    <button type="button" className="email" onClick={copy} aria-label={loc(site.ui.copyEmail, lang)}>
-      {copied ? loc(site.ui.copied, lang) : address}
-    </button>
+    <span className="email-wrap">
+      <a className="email" href={`mailto:${address}`} onClick={onClick}>
+        {address}
+      </a>
+      {notice ? <span className="email-notice">{notice}</span> : null}
+    </span>
   );
 }
 

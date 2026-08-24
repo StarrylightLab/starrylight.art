@@ -8,11 +8,12 @@
     "langAria": { "zh": "切换语言", "en": "Switch language" },
     "seeWork": { "zh": "看作品", "en": "View work" },
     "workTitle": { "zh": "作品", "en": "Work" },
-    "linksTitle": { "zh": "个人链接", "en": "Links" },
+    "linksTitle": { "zh": "可以在这些地方找到我", "en": "Find me here" },
     "social": { "zh": "社交", "en": "Social" },
     "footerNote": { "zh": "保持联系", "en": "Stay in touch" },
     "copyEmail": { "zh": "复制邮箱", "en": "Copy email" },
-    "copied": { "zh": "已复制", "en": "Copied" }
+    "copied": { "zh": "已复制", "en": "Copied" },
+    "mailFallback": { "zh": "打不开邮件应用，已复制邮箱地址", "en": "Couldn't open a mail app. Email address copied." }
   },
   "hero": {
     "eyebrow": { "zh": "UI 设计 · 像素画 · 小工具", "en": "UI · Pixel · Small tools" },

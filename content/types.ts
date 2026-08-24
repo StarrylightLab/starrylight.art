@@ -30,6 +30,7 @@ export type SiteCopy = {
   footerNote: Localized;
   copyEmail: Localized;
   copied: Localized;
+  mailFallback: Localized;
 };
 
 export type SiteContent = {
