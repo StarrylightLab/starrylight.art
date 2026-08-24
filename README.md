@@ -2,8 +2,17 @@
 
 Personal homepage for `starrylight.art`.
 
+## Local development
+
+```bash
+npm ci
+npm run dev
+```
+
+The app is served at http://localhost:3000/.
+
 ## Automatic Cloudflare deployment
 
-Publish this project to GitHub, then add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` as repository Actions secrets. The included workflow deploys the Cloudflare Worker every time `main` receives a push. The existing `pixler.starrylight.art` DNS record remains separate.
+Pushes to `main` deploy a dedicated Worker named `starrylight-art` and attach it to `starrylight.art` and `www.starrylight.art`. The existing `pixler.starrylight.art` Worker is left unchanged.
 
-After the first deployment, add `starrylight.art` (and optionally `www.starrylight.art`) as custom domains for the Worker in Cloudflare. Once connected, every push to `main` deploys automatically.
+The repository needs one Actions secret: `CLOUDFLARE_API_TOKEN` (Cloudflare "Edit Cloudflare Workers" token). The account ID is already in the workflow.
