@@ -1,0 +1,40 @@
+{
+  "hero": {
+    "eyebrow": "UI 设计 · 像素画 · 小工具",
+    "line1": "画像素，",
+    "line2": "做一点",
+    "accent": "有光的东西。",
+    "intro": "我是 UI 设计师，也是像素画爱好者。平时会做一些 Figma 插件，以及一些小的前端项目。"
+  },
+  "projects": [
+    {
+      "id": "pixler",
+      "title": "Pixler",
+      "description": "把任意图片变成可施工的拼豆图纸。",
+      "href": "https://pixler.starrylight.art",
+      "tag": "Web",
+      "style": "pixel"
+    },
+    {
+      "id": "pixel-icon",
+      "title": "Pixel Icon",
+      "description": "在 Figma 里画 12×12 和 24×24 像素图标，导出 SVG。",
+      "href": "https://www.figma.com/community/plugin/1591864397761796253/pixel-icon",
+      "tag": "Figma 插件",
+      "style": "plugin"
+    }
+  ],
+  "profiles": [
+    {
+      "name": "Figma",
+      "url": "https://www.figma.com/@starrylight",
+      "icon": "/social/figma.svg"
+    },
+    {
+      "name": "爱发电",
+      "url": "https://ifdian.net/a/starrylightlab",
+      "icon": "/social/afdian.svg"
+    }
+  ],
+  "social": []
+}
