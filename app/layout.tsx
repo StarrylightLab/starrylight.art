@@ -10,7 +10,7 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Starrylight — 星光',
   description:
-    'UI designer and pixel-art enthusiast. Figma plugins and small front-end projects. / UI 设计师、像素画爱好者。',
+    'Thoughtful interfaces, playful tools, and pixels with a little light. / 做用心的界面、有趣的小工具，和带一点光的像素。',
   icons: {
     icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
   },

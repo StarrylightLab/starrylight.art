@@ -3,26 +3,26 @@
   "ui": {
     "skip": { "zh": "跳到作品", "en": "Skip to work" },
     "navAria": { "zh": "主导航", "en": "Primary" },
-    "navWork": { "zh": "作品", "en": "Work" },
-    "navLinks": { "zh": "链接", "en": "Links" },
+    "navWork": { "zh": "精选作品", "en": "Selected work" },
+    "navLinks": { "zh": "更多链接", "en": "More" },
     "langAria": { "zh": "切换语言", "en": "Switch language" },
-    "seeWork": { "zh": "看作品", "en": "View work" },
-    "workTitle": { "zh": "作品", "en": "Work" },
-    "linksTitle": { "zh": "可以在这些地方找到我", "en": "Find me here" },
+    "seeWork": { "zh": "浏览精选作品", "en": "Explore selected work" },
+    "workTitle": { "zh": "精选作品", "en": "Selected work" },
+    "linksTitle": { "zh": "在这里继续找到我", "en": "Find me elsewhere" },
     "social": { "zh": "社交", "en": "Social" },
-    "footerNote": { "zh": "保持联系", "en": "Stay in touch" },
+    "footerNote": { "zh": "有想一起完成的想法？欢迎来信。", "en": "Have an idea in mind? Say hello." },
     "copyEmail": { "zh": "复制邮箱", "en": "Copy email" },
     "copied": { "zh": "已复制", "en": "Copied" },
     "mailFallback": { "zh": "打不开邮件应用，已复制邮箱地址", "en": "Couldn't open a mail app. Email address copied." }
   },
   "hero": {
-    "eyebrow": { "zh": "UI 设计 · 像素画 · 小工具", "en": "UI · Pixel · Small tools" },
-    "line1": { "zh": "画像素，", "en": "Drawing pixels," },
-    "line2": { "zh": "做一点", "en": " making things" },
-    "accent": { "zh": "有光的东西", "en": "with a little light" },
+    "eyebrow": { "zh": "独立设计师与创作者 · 中国", "en": "Independent designer & maker · China" },
+    "line1": { "zh": "做用心的界面，", "en": "Thoughtful interfaces," },
+    "line2": { "zh": "有趣的小工具，", "en": "playful tools," },
+    "accent": { "zh": "和带一点光的像素。", "en": "and pixels with a little light." },
     "intro": {
-      "zh": "我是 UI 设计师，也是像素画爱好者。",
-      "en": "I'm a UI designer and a pixel-art enthusiast."
+      "zh": "我是 Starrylight，一名独立设计师与创作者，制作数字产品、视觉系统和小型网页实验。",
+      "en": "I'm Starrylight, an independent designer and maker creating digital products, visual systems, and small web experiments."
     }
   },
   "projects": [
@@ -30,8 +30,8 @@
       "id": "pixler",
       "title": "Pixler",
       "description": {
-        "zh": "把图片变成可施工的拼豆图纸。",
-        "en": "Turn pictures into bead-art patterns."
+        "zh": "把喜欢的图片，变成可以照着制作的拼豆图纸。",
+        "en": "Turn your favorite images into bead-art patterns you can actually make."
       },
       "href": "https://pixler.starrylight.art",
       "tag": { "zh": "网页", "en": "Web" },
@@ -41,8 +41,8 @@
       "id": "pixel-icon",
       "title": "Pixel Icon",
       "description": {
-        "zh": "在 Figma 里画像素图标。",
-        "en": "Draw pixel icons in Figma."
+        "zh": "在 Figma 里，轻松画出像素风图标。",
+        "en": "Draw pixel-style icons right in Figma."
       },
       "href": "https://www.figma.com/community/plugin/1591864397761796253/pixel-icon",
       "tag": { "zh": "Figma 插件", "en": "Figma plugin" },

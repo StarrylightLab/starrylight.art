@@ -175,6 +175,7 @@ export default function Home() {
             <span className="dust d2" />
             <span className="dust d3" />
           </div>
+          <p className="eyebrow">{loc(site.hero.eyebrow, lang)}</p>
           <h1>
             {loc(site.hero.line1, lang)}
             <span className="soft-break">{loc(site.hero.line2, lang)}</span>

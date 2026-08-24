@@ -361,6 +361,10 @@ nav {
   color: var(--mute);
 }
 
+.hero .eyebrow {
+  margin-bottom: 0.8rem;
+}
+
 h1 {
   position: relative;
   z-index: 1;
@@ -383,6 +387,17 @@ h1 em {
   font-style: normal;
   font-weight: 500;
   color: var(--light);
+}
+
+html[data-lang='en'] h1 {
+  max-width: min(18ch, 100%);
+  font-size: clamp(2.35rem, 4.9vw, 5rem);
+  letter-spacing: -0.05em;
+}
+
+html[data-lang='en'] h1 .soft-break,
+html[data-lang='en'] h1 .break {
+  display: block;
 }
 
 .intro {
