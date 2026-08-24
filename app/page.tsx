@@ -1,7 +1,18 @@
-import site from '../content/site.json';
-import { isSiteLink, type SiteLink, type SiteProject } from '../content/types';
+'use client';
 
-const projects = site.projects as SiteProject[];
+import { useEffect, useState } from 'react';
+import siteJson from '../content/site.json';
+import {
+  isSiteLink,
+  loc,
+  readLang,
+  writeLang,
+  type Lang,
+  type SiteContent,
+  type SiteLink,
+} from '../content/types';
+
+const site = siteJson as SiteContent;
 const profiles = site.profiles.filter(isSiteLink);
 const social = site.social.filter(isSiteLink);
 
@@ -24,38 +35,72 @@ function LinkGlyph({ name, icon }: { name: string; icon?: string }) {
   );
 }
 
-function ExternalLinks({ items, className }: { items: SiteLink[]; className: string }) {
+function ExternalLinks({ items, className, lang }: { items: SiteLink[]; className: string; lang: Lang }) {
   return (
     <ul className={className}>
-      {items.map((item) => (
-        <li key={`${item.name}-${item.url}`}>
-          <a href={item.url} target="_blank" rel="noreferrer">
-            <LinkGlyph name={item.name} icon={item.icon} />
-            <span>{item.name}</span>
-          </a>
-        </li>
-      ))}
+      {items.map((item) => {
+        const name = loc(item.name, lang);
+        return (
+          <li key={`${name}-${item.url}`}>
+            <a href={item.url} target="_blank" rel="noreferrer">
+              <LinkGlyph name={name} icon={item.icon} />
+              <span>{name}</span>
+            </a>
+          </li>
+        );
+      })}
     </ul>
   );
 }
 
+function LanguageSwitch({ lang, onChange }: { lang: Lang; onChange: (lang: Lang) => void }) {
+  return (
+    <div className="lang-switch" role="group" aria-label={loc(site.ui.langAria, lang)}>
+      <button type="button" className={lang === 'zh' ? 'is-active' : undefined} onClick={() => onChange('zh')}>
+        中
+      </button>
+      <span className="lang-sep" aria-hidden="true">
+        /
+      </span>
+      <button type="button" className={lang === 'en' ? 'is-active' : undefined} onClick={() => onChange('en')}>
+        EN
+      </button>
+    </div>
+  );
+}
+
 export default function Home() {
+  const [lang, setLang] = useState<Lang>('zh');
+
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search).get('lang');
+    const next = query === 'en' || query === 'zh' ? query : readLang();
+    setLang(next);
+    writeLang(next);
+  }, []);
+
+  const switchLang = (next: Lang) => {
+    setLang(next);
+    writeLang(next);
+  };
+
   return (
     <>
       <div className="grain" aria-hidden="true" />
       <a className="skip" href="#work">
-        跳到作品
+        {loc(site.ui.skip, lang)}
       </a>
       <header>
-        <nav aria-label="主导航">
+        <nav aria-label={loc(site.ui.navAria, lang)}>
           <a className="brand" href="#top">
             <Star className="brand-star" />
             <span className="wordmark">starrylight</span>
             <span className="zh">星光</span>
           </a>
           <div className="nav-links">
-            <a href="#work">作品</a>
-            <a href="#links">链接</a>
+            <a href="#work">{loc(site.ui.navWork, lang)}</a>
+            <a href="#links">{loc(site.ui.navLinks, lang)}</a>
+            <LanguageSwitch lang={lang} onChange={switchLang} />
           </div>
         </nav>
       </header>
@@ -67,28 +112,28 @@ export default function Home() {
             <span className="flare flare-y" />
             <Star className="spark" />
           </div>
-          <p className="eyebrow">{site.hero.eyebrow}</p>
+          <p className="eyebrow">{loc(site.hero.eyebrow, lang)}</p>
           <h1>
-            {site.hero.line1}
-            <span className="soft-break">{site.hero.line2}</span>
+            {loc(site.hero.line1, lang)}
+            <span className="soft-break">{loc(site.hero.line2, lang)}</span>
             <span className="break">
-              <em>{site.hero.accent}</em>
+              <em>{loc(site.hero.accent, lang)}</em>
             </span>
           </h1>
-          <p className="intro">{site.hero.intro}</p>
+          <p className="intro">{loc(site.hero.intro, lang)}</p>
           <div className="hero-actions">
             <a className="button" href="#work">
-              看看作品 <span aria-hidden="true">↓</span>
+              {loc(site.ui.seeWork, lang)} <span aria-hidden="true">↓</span>
             </a>
           </div>
         </section>
         <section className="work" id="work" aria-labelledby="work-title">
           <div className="section-heading">
-            <p className="eyebrow">Selected work</p>
-            <h2 id="work-title">正在做的东西</h2>
+            <p className="eyebrow">{loc(site.ui.workEyebrow, lang)}</p>
+            <h2 id="work-title">{loc(site.ui.workTitle, lang)}</h2>
           </div>
           <ul className="project-list">
-            {projects.map((project) => (
+            {site.projects.map((project) => (
               <li key={project.id}>
                 <a
                   className={`project${project.style ? ` is-${project.style}` : ''}`}
@@ -96,10 +141,10 @@ export default function Home() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <span className="project-type">{project.tag}</span>
+                  <span className="project-type">{loc(project.tag, lang)}</span>
                   <span className="project-copy">
                     <strong>{project.title}</strong>
-                    <small>{project.description}</small>
+                    <small>{loc(project.description, lang)}</small>
                   </span>
                   <span className="arrow" aria-hidden="true">
                     ↗
@@ -111,21 +156,21 @@ export default function Home() {
         </section>
         <section className="elsewhere" id="links" aria-labelledby="links-title">
           <div className="section-heading">
-            <p className="eyebrow">Elsewhere</p>
-            <h2 id="links-title">个人链接</h2>
+            <p className="eyebrow">{loc(site.ui.linksEyebrow, lang)}</p>
+            <h2 id="links-title">{loc(site.ui.linksTitle, lang)}</h2>
           </div>
-          <ExternalLinks items={profiles} className="profile-list" />
+          <ExternalLinks items={profiles} className="profile-list" lang={lang} />
           {social.length > 0 ? (
             <div className="social-block">
-              <p className="eyebrow">社交</p>
-              <ExternalLinks items={social} className="social-list" />
+              <p className="eyebrow">{loc(site.ui.social, lang)}</p>
+              <ExternalLinks items={social} className="social-list" lang={lang} />
             </div>
           ) : null}
         </section>
       </main>
       <footer id="contact">
-        <p>欢迎一起做点有意思的东西。</p>
-        <a href="mailto:hello@starrylight.art">hello@starrylight.art</a>
+        <p>{loc(site.ui.footerNote, lang)}</p>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
         <span>© {new Date().getFullYear()} Starrylight · 星光</span>
       </footer>
     </>

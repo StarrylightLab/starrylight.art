@@ -8,7 +8,8 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Starrylight — 星光',
-  description: 'UI 设计师、像素画爱好者。Figma 插件与前端小项目。',
+  description:
+    'UI designer and pixel-art enthusiast. Figma plugins and small front-end projects. / UI 设计师、像素画爱好者。',
 };
 
 export const viewport: Viewport = {
@@ -17,8 +18,16 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="zh-CN">
-      <body>{children}</body>
+    <html lang="zh-CN" suppressHydrationWarning>
+      <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              '(function(){try{var s=localStorage.getItem("starrylight-lang");var l=s==="en"||s==="zh"?s:(navigator.language||"").toLowerCase().indexOf("zh")===0?"zh":"en";document.documentElement.lang=l==="zh"?"zh-CN":"en";document.documentElement.setAttribute("data-lang",l);}catch(e){}})();',
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
