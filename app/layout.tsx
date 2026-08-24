@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: 'Starrylight — 星光',
   description:
     'UI designer and pixel-art enthusiast. Figma plugins and small front-end projects. / UI 设计师、像素画爱好者。',
+  icons: {
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+  },
 };
 
 export const viewport: Viewport = {
