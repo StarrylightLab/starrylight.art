@@ -4,12 +4,6 @@ Personal homepage for `starrylight.art`.
 
 ## Automatic Cloudflare deployment
 
-Publish this project to GitHub, then connect the repository to Cloudflare Pages. The existing `pixler.starrylight.art` DNS record remains separate.
+Publish this project to GitHub, then add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` as repository Actions secrets. The included workflow deploys the Cloudflare Worker every time `main` receives a push. The existing `pixler.starrylight.art` DNS record remains separate.
 
-Use these Cloudflare Pages settings:
-
-- Build command: `npm run build`
-- Production branch: `main`
-- Custom domain: `starrylight.art` (and optionally `www.starrylight.art`)
-
-Once connected, every push to `main` deploys automatically.
+After the first deployment, add `starrylight.art` (and optionally `www.starrylight.art`) as custom domains for the Worker in Cloudflare. Once connected, every push to `main` deploys automatically.
