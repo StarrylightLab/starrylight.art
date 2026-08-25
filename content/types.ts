@@ -26,7 +26,6 @@ export type SiteCopy = {
   seeWork: Localized;
   workTitle: Localized;
   linksTitle: Localized;
-  social: Localized;
   footerNote: Localized;
   copyEmail: Localized;
   copied: Localized;
@@ -44,8 +43,7 @@ export type SiteContent = {
     intro: Localized;
   };
   projects: SiteProject[];
-  profiles: SiteLink[];
-  social: SiteLink[];
+  links: SiteLink[];
 };
 
 export function loc(value: Localized, lang: Lang): string {

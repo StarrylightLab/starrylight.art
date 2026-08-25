@@ -9,7 +9,6 @@
     "seeWork": { "zh": "浏览精选作品", "en": "Explore selected work" },
     "workTitle": { "zh": "精选作品", "en": "Selected work" },
     "linksTitle": { "zh": "在这里继续找到我", "en": "Find me elsewhere" },
-    "social": { "zh": "社交", "en": "Social" },
     "footerNote": { "zh": "有想一起完成的想法？欢迎来信。", "en": "Have an idea in mind? Say hello." },
     "copyEmail": { "zh": "复制邮箱", "en": "Copy email" },
     "copied": { "zh": "已复制", "en": "Copied" },
@@ -49,7 +48,7 @@
       "style": "plugin"
     }
   ],
-  "profiles": [
+  "links": [
     {
       "name": "Figma",
       "url": "https://www.figma.com/@starrylight",
@@ -59,7 +58,11 @@
       "name": { "zh": "爱发电", "en": "Afdian" },
       "url": "https://ifdian.net/a/starrylightlab",
       "icon": "/social/afdian.svg"
+    },
+    {
+      "name": "小红书",
+      "url": "https://xhslink.cn/o/2IJ3sbZ2Vc5",
+      "icon": "/social/xiaohongshu.png"
     }
-  ],
-  "social": []
+  ]
 }

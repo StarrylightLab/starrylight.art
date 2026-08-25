@@ -2,6 +2,10 @@
 
 Personal homepage for `starrylight.art`.
 
+## 添加项目和平台链接
+
+不需要修改网页代码。请按照 [`content/README.md`](content/README.md) 的中文说明编辑 `content/site.json`。
+
 ## Local development
 
 ```bash

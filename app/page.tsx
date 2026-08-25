@@ -13,8 +13,7 @@ import {
 } from '../content/types';
 
 const site = siteJson as SiteContent;
-const profiles = site.profiles.filter(isSiteLink);
-const social = site.social.filter(isSiteLink);
+const links = site.links.filter(isSiteLink);
 
 function Star({ className }: { className?: string }) {
   return (
@@ -220,13 +219,7 @@ export default function Home() {
           <div className="section-heading">
             <h2 id="links-title">{loc(site.ui.linksTitle, lang)}</h2>
           </div>
-          <ExternalLinks items={profiles} className="profile-list" lang={lang} />
-          {social.length > 0 ? (
-            <div className="social-block">
-              <p className="eyebrow">{loc(site.ui.social, lang)}</p>
-              <ExternalLinks items={social} className="social-list" lang={lang} />
-            </div>
-          ) : null}
+          <ExternalLinks items={links} className="profile-list" lang={lang} />
         </section>
       </main>
       <footer id="contact">
