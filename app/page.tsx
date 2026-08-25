@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import siteJson from '../content/site.json';
 import {
   isSiteLink,
@@ -69,50 +69,101 @@ function LanguageSwitch({ lang, onChange }: { lang: Lang; onChange: (lang: Lang)
   );
 }
 
-async function copyText(value: string) {
+async function copyText(value: string): Promise<boolean> {
   try {
     await navigator.clipboard.writeText(value);
+    return true;
   } catch {
-    const field = document.createElement('textarea');
-    field.value = value;
-    field.setAttribute('readonly', '');
-    field.style.position = 'fixed';
-    field.style.left = '-9999px';
-    document.body.appendChild(field);
-    field.select();
-    document.execCommand('copy');
-    field.remove();
+    try {
+      const field = document.createElement('textarea');
+      field.value = value;
+      field.setAttribute('readonly', '');
+      field.style.position = 'fixed';
+      field.style.left = '-9999px';
+      document.body.appendChild(field);
+      field.select();
+      const ok = document.execCommand('copy');
+      field.remove();
+      return ok;
+    } catch {
+      return false;
+    }
   }
 }
 
 function EmailButton({ address, lang }: { address: string; lang: Lang }) {
   const [notice, setNotice] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+  const noticeTimer = useRef<number>(0);
+  const copiedTimer = useRef<number>(0);
 
-  const onClick = () => {
+  useEffect(() => {
+    return () => {
+      window.clearTimeout(noticeTimer.current);
+      window.clearTimeout(copiedTimer.current);
+    };
+  }, []);
+
+  const flashNotice = (text: string, ms = 2800) => {
+    setNotice(text);
+    window.clearTimeout(noticeTimer.current);
+    noticeTimer.current = window.setTimeout(() => setNotice(null), ms);
+  };
+
+  const flashCopied = () => {
+    setCopied(true);
+    window.clearTimeout(copiedTimer.current);
+    copiedTimer.current = window.setTimeout(() => setCopied(false), 1600);
+  };
+
+  const onMailClick = () => {
+    // Copy while the click still counts as a user gesture. Many browsers
+    // refuse clipboard writes after the mailto handoff / timeout.
+    void copyText(address);
+
     let leftPage = false;
     const markLeave = () => {
       leftPage = true;
     };
     window.addEventListener('blur', markLeave);
     window.addEventListener('pagehide', markLeave);
+    document.addEventListener('visibilitychange', markLeave);
 
     window.setTimeout(() => {
       window.removeEventListener('blur', markLeave);
       window.removeEventListener('pagehide', markLeave);
-      if (leftPage || document.hidden || !document.hasFocus()) return;
-      void copyText(address).then(() => {
-        setNotice(loc(site.ui.mailFallback, lang));
-        window.setTimeout(() => setNotice(null), 2400);
-      });
-    }, 700);
+      document.removeEventListener('visibilitychange', markLeave);
+      if (leftPage || document.hidden) return;
+      flashNotice(loc(site.ui.mailFallback, lang));
+    }, 900);
+  };
+
+  const onCopyClick = async () => {
+    const ok = await copyText(address);
+    if (ok) {
+      flashCopied();
+      setNotice(null);
+    } else {
+      flashNotice(loc(site.ui.copyFailed, lang));
+    }
   };
 
   return (
     <span className="email-wrap">
-      <a className="email" href={`mailto:${address}`} onClick={onClick}>
+      <a
+        className="email"
+        href={`mailto:${address}`}
+        onClick={onMailClick}
+        aria-label={loc(site.ui.mailAria, lang)}
+      >
         {address}
       </a>
-      {notice ? <span className="email-notice">{notice}</span> : null}
+      <button type="button" className="email-copy" onClick={onCopyClick}>
+        {copied ? loc(site.ui.copied, lang) : loc(site.ui.copyEmail, lang)}
+      </button>
+      <span className="email-notice" role="status" aria-live="polite">
+        {notice}
+      </span>
     </span>
   );
 }
@@ -157,8 +208,8 @@ export default function Home() {
             <div className="nav-links">
               <a href="#work">{loc(site.ui.navWork, lang)}</a>
               <a href="#links">{loc(site.ui.navLinks, lang)}</a>
-              <LanguageSwitch lang={lang} onChange={switchLang} />
             </div>
+            <LanguageSwitch lang={lang} onChange={switchLang} />
           </nav>
         </div>
       </header>
@@ -177,11 +228,8 @@ export default function Home() {
           </div>
           <p className="eyebrow">{loc(site.hero.eyebrow, lang)}</p>
           <h1>
-            {loc(site.hero.line1, lang)}
-            <span className="soft-break">{loc(site.hero.line2, lang)}</span>
-            <span className="break">
-              <em>{loc(site.hero.accent, lang)}</em>
-            </span>
+            {loc(site.hero.line1, lang)}<span className="soft-break">{loc(site.hero.line2, lang)}</span>
+            <span className="break"><em>{loc(site.hero.accent, lang)}</em></span>
           </h1>
           <p className="intro">{loc(site.hero.intro, lang)}</p>
           <div className="hero-actions">
@@ -232,7 +280,7 @@ export default function Home() {
       <footer id="contact">
         <p>{loc(site.ui.footerNote, lang)}</p>
         <EmailButton address={site.email} lang={lang} />
-        <span>© {new Date().getFullYear()} Starrylight · 星光</span>
+        <span className="legal">© {new Date().getFullYear()} Starrylight · 星光</span>
       </footer>
     </>
   );

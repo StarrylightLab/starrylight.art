@@ -13,6 +13,8 @@
     "footerNote": { "zh": "有想一起完成的想法？欢迎来信。", "en": "Have an idea in mind? Say hello." },
     "copyEmail": { "zh": "复制邮箱", "en": "Copy email" },
     "copied": { "zh": "已复制", "en": "Copied" },
+    "copyFailed": { "zh": "复制失败，请长按地址手动复制", "en": "Couldn't copy. Long-press the address instead." },
+    "mailAria": { "zh": "打开邮件应用写信", "en": "Open your email app" },
     "mailFallback": { "zh": "打不开邮件应用，已复制邮箱地址", "en": "Couldn't open a mail app. Email address copied." }
   },
   "hero": {
